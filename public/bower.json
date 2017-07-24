@@ -1,0 +1,22 @@
+{
+  "name": "simple_project",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Guepardo <bsinet@hotmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Guepardo/simple_project",
+  "directory": "public/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angular2#^1.6.5",
+    "bootstrap": "v4.0.0-alpha.6"
+  }
+}

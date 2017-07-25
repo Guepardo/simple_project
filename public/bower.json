@@ -7,7 +7,6 @@
   ],
   "license": "MIT",
   "homepage": "https://github.com/Guepardo/simple_project",
-  "directory": "public/",
   "ignore": [
     "**/.*",
     "node_modules",

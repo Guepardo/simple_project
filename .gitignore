@@ -1,2 +1,13 @@
-vendor
-public/bower_components
+/node_modules
+/public/hot
+/public/bower_compoments
+/public/storage
+/storage/*.key
+/vendor
+/.idea
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.env

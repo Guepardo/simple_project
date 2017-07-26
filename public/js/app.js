@@ -15,7 +15,7 @@ app.config(function($routeProvider, $locationProvider) {
         controller : 'SystemsController'
     })
     .otherwise({
-        template : '<h1>None</h1><p>Nothing has been selected</p>'
+        templateUrl : 'partials/main.html'
     });
 });
 
@@ -23,13 +23,29 @@ app.factory('System', function($resource) {
     return $resource('/api/system/:id');
 }); 
 
-app.controller('SystemsController', function($scope, System) {
+app.service('SystemSearch', function($http) {
+    var endPoint = '/api/system';
+    this.search = function(query, page) {
+        var args = { query: query };
+        if ( page != undefined ) {
+            args['page'] = page;
+        }
+        return $http.get(endPoint, { params: args });
+    };
+});
+
+app.controller('SystemsController', function($scope, System, SystemSearch) {
     $scope.system = {};
     $scope.systems = []; 
 
+    $scope.pagination = {
+        page: 0,
+        total: 0
+    };
+
     $scope.formHasError = function() {
         return Object.keys($scope.new_system.$error).length > 0
-    }
+    };
 
     $scope.save = function() {
         if( Object.keys($scope.new_system.$error).length > 0 ) {
@@ -38,8 +54,47 @@ app.controller('SystemsController', function($scope, System) {
         }
 
         System.save($scope.system, function(data) {
-            alert(data);
-            console.log(data);
+            // todo
         });
+    };
+
+    $scope.updatePagination = function(data) {
+        $scope.systems = data.data;
+        $scope.pagination.total = Math.floor(data.total / data.per_page);
+        $scope.pagination.page = data.current_page;
+    };
+
+    $scope.goTo = function(index) {
+        $scope.search(index);
+    };
+
+    $scope.buildSearchQuery = function() {
+        if ($scope.query == undefined ) {
+            return '';
+        }
+
+        var query = Object
+        .keys($scope.query)
+        .map( function(key) { return $scope.query[key]; })
+        .reduce( function(previous, next) { return previous + ' ' +  next; });
+        return query;
+    };
+
+    $scope.clearFields = function() {
+        $scope.query = {};
+    };
+
+    $scope.search = function(page = undefined) {
+        var query = $scope.buildSearchQuery();
+        SystemSearch.search(query, page)
+            .then( function( response ) {
+                $scope.updatePagination(response.data);
+            }, function (error) {
+
+            });
+    };
+
+    $scope.range = function(number) {
+        return new Array(number);
     }
 });

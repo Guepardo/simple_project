@@ -10,4 +10,5 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::resource('systems', 'SystemController');
+// Route::resource('system', 'SystemController');
+Route::get('/', 'SinglePageApplicationController@index');

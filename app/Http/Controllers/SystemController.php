@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\System;
 
-class SystemController extends Controller
+class SystemController extends CrudController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('system.index');
+        return parent::paginate(System::class, $request->input('query'));
     }
 
     /**
@@ -34,7 +35,7 @@ class SystemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return parent::save(System::class, $request->all());
     }
 
     /**

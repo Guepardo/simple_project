@@ -15,7 +15,10 @@ class CreateSystemsTable extends Migration
     {
         Schema::create('systems', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('description', 100);
+            $table->string('initials', 10);
+            $table->string('attendance_email', 100)->nullable();
+            $table->string('url', 50)->nullable();
             $table->timestamps();
         });
     }

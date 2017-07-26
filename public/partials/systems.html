@@ -11,13 +11,13 @@
 				<div class="col-md-12">
 					<form name="search_system" >
 					  	<div class="form-group row">
-						  <label for="description" class="col-2 col-form-label">Descrição *</label>
+						  <label for="description" class="col-2 col-form-label">Descrição </label>
 						  <div class="col-10">
 						    <input class="form-control" type="text" name="Descrição" ng-model="query.description" id="description">
 						  </div>
 						</div>
 						<div class="form-group row">
-						  <label for="initials" class="col-2 col-form-label">Sigla *</label>
+						  <label for="initials" class="col-2 col-form-label">Sigla </label>
 						  <div class="col-10">
 						    <input class="form-control" type="text" name="Sigla" ng-model="query.initials" id="initials" >
 						  </div>
@@ -58,26 +58,26 @@
 						      <td>{{system.attendance_email}}</td>
 						      <td>{{system.url}}</td>
 						      <td>{{system.status}}</td>
-						      <td>{{}}</td>
+						      <td><button type="button" class="btn btn-secondary disabled" '>Editar</button></td>
 						    </tr>
 						  </tbody>
 						</table>
-						{{pagination}}
+
 						<nav aria-label="Page navigation example">
 						  <ul class="pagination justify-content-center"">
 						    <li class="page-item">
-						      <a class="page-link" href="#" aria-label="Previous">
+						      <a class="page-link" aria-label="Previous" ng-click="paginationPrevious();">
 						        <span aria-hidden="true">&laquo;</span>
-						        <span class="sr-only">Previous</span>
+						        <span class="sr-only">Anterior</span>
 						      </a>
 						    </li>
 						    <li class="page-item" ng-repeat=" page in range(pagination.total) track by $index ">
-						    	<a class="page-link active" ng-click="goTo($index + 1);">{{$index + 1}}</a>
+						    	<a class="page-link" ng-click="goTo($index + 1);">{{$index + 1}}</a>
 						    </li>
 						    <li class="page-item">
-						      <a class="page-link" href="#" aria-label="Next">
+						      <a class="page-link" aria-label="Next" ng-click="paginationNext();">
 						        <span aria-hidden="true">&raquo;</span>
-						        <span class="sr-only">Next</span>
+						        <span class="sr-only">Próximo</span>
 						      </a>
 						    </li>
 						  </ul>
@@ -91,7 +91,7 @@
 		  <div class="row bottom-box-buttom">
 		    <div class="col-md-12">
 				<button type="button" class="btn btn-secondary" ng-click='search();'>Pesquisar</button>
-				<button type="button" class="btn btn-primary" ng-click="clearFields();">Limpar</button>
+				<button type="button" class="btn btn-primary" ng-click="clearFieldsQuery();">Limpar</button>
 				<a href="#/system/new" class="btn btn-success">Novo Sistema</a>
 		    </div>
 		  </div>

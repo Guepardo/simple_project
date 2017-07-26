@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Enums\SystemStatusTypes;
 use App\System;
 
 class SystemController extends CrudController
@@ -35,7 +36,9 @@ class SystemController extends CrudController
      */
     public function store(Request $request)
     {
-        return parent::save(System::class, $request->all());
+        $args = $request->all(); 
+        $args['status'] = SystemStatusTypes::ACTIVE;
+        return parent::save(System::class, $args);
     }
 
     /**

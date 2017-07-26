@@ -19,6 +19,7 @@ class CreateSystemsTable extends Migration
             $table->string('initials', 10);
             $table->string('attendance_email', 100)->nullable();
             $table->string('url', 50)->nullable();
+            $table->string('status',50);
             $table->timestamps();
         });
     }

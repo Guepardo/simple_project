@@ -14,3 +14,11 @@
 .right {
 	float: right;
 }
+
+.loading-spiner-holder {
+	position: absolute;
+	left:50%;
+	top:30%;
+	z-index: 100;
+	background: white;
+}

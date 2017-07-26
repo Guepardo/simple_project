@@ -1,5 +1,6 @@
 var app = angular.module('App', ['ngRoute', 'ngResource']);
 
+// Roteamento.
 app.config(function($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix('');
     $routeProvider
@@ -19,10 +20,14 @@ app.config(function($routeProvider, $locationProvider) {
     });
 });
 
+
+// Fábrica que gera entidade no padrão resource.
 app.factory('System', function($resource) {
     return $resource('/api/system/:id');
 }); 
 
+
+// Serviços para o controlador de Sistemas.
 app.service('SystemSearch', function($http) {
     var endPoint = '/api/system';
     this.search = function(query, page) {
@@ -34,10 +39,12 @@ app.service('SystemSearch', function($http) {
     };
 });
 
+
+// Controlle de Sistemas.
 app.controller('SystemsController', function($scope, System, SystemSearch) {
     $scope.system = {};
     $scope.systems = []; 
-
+    $scope.invalid = false;
     $scope.pagination = {
         page: 0,
         total: 0
@@ -54,18 +61,26 @@ app.controller('SystemsController', function($scope, System, SystemSearch) {
         }
 
         System.save($scope.system, function(data) {
-            // todo
+            if( data.success ) {
+                $scope.clearFieldsForm();
+                alert('Sistema cadastrado com sucesso.');
+            }
         });
     };
 
     $scope.updatePagination = function(data) {
         $scope.systems = data.data;
-        $scope.pagination.total = Math.floor(data.total / data.per_page);
+        var total = Math.round((data.total / data.per_page) + 0.5); 
+        $scope.pagination.total = ( total == 0 ) ? 1 : total;
         $scope.pagination.page = data.current_page;
     };
 
     $scope.goTo = function(index) {
         $scope.search(index);
+    };
+
+    $scope.goBack = function() {
+        window.history.back();
     };
 
     $scope.buildSearchQuery = function() {
@@ -80,8 +95,24 @@ app.controller('SystemsController', function($scope, System, SystemSearch) {
         return query;
     };
 
-    $scope.clearFields = function() {
+    $scope.clearFieldsQuery = function() {
         $scope.query = {};
+    };
+
+    $scope.clearFieldsForm = function() {
+        $scope.system = {};
+    };
+
+    $scope.paginationNext = function() {
+        if ($scope.pagination.page < $scope.pagination.total) {
+            $scope.search(++$scope.pagination.page);
+        }
+    };
+
+    $scope.paginationPrevious = function() {
+        if ($scope.pagination.page != 0) {
+            $scope.search(--$scope.pagination.page);
+        }
     };
 
     $scope.search = function(page = undefined) {
@@ -90,7 +121,7 @@ app.controller('SystemsController', function($scope, System, SystemSearch) {
             .then( function( response ) {
                 $scope.updatePagination(response.data);
             }, function (error) {
-
+                alert("Desculpe, mas houve um erro no servidor. Tente mais tarde.");
             });
     };
 
@@ -98,3 +129,23 @@ app.controller('SystemsController', function($scope, System, SystemSearch) {
         return new Array(number);
     }
 });
+
+
+// Diretivas.
+app.directive('loading',  ['$http' ,function ($http) {
+    return {
+        restrict: 'AE',
+        link: function (scope, elm, attrs) {
+            scope.isLoading = function () {
+                return $http.pendingRequests.length > 0;
+            };
+            scope.$watch(scope.isLoading, function (v) {
+                if(v){
+                    $(elm).show();
+                }else{
+                    $(elm).hide();
+                }
+            });
+        }
+    };
+}]);

@@ -15,7 +15,9 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "angular2#^1.6.5",
-    "bootstrap": "v4.0.0-alpha.6"
+    "bootstrap": "v4.0.0-alpha.6",
+    "angular": "^1.6.5",
+    "angular-route": "^1.6.5",
+    "angular-resource": "^1.6.5"
   }
 }

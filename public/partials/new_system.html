@@ -1,0 +1,59 @@
+<div class="container" style="top:10px;">
+    <div class="col-md-12">
+		<!-- Search area -->
+		<div class="card">
+		  <div class="card-header">
+			Novo Sistema
+		  </div>
+		  <div class="card-block">
+			<!-- Form -->
+			<div class="row">
+				<div class="col-md-12">
+					<form name="new_system" >
+					  	<div class="form-group row">
+						  <label for="description" class="col-2 col-form-label">Descrição *</label>
+						  <div class="col-10">
+						    <input class="form-control" type="text" name="Descrição" ng-model="system.description" id="description" required>
+						  </div>
+						</div>
+						<div class="form-group row">
+						  <label for="initials" class="col-2 col-form-label">Sigla *</label>
+						  <div class="col-10">
+						    <input class="form-control" type="text" name="Sigla" ng-model="system.initials" id="initials" required>
+						  </div>
+						</div>
+						<div class="form-group row">
+						  <label for="attendance_email" class="col-2 col-form-label">E-mail de Atend.</label>
+						  <div class="col-10">
+						    <input class="form-control" type="email" name="E-mail de Atendimento" ng-model="system.attendance_email" id="attendance_email" required>
+						  </div>
+						</div>
+						<div class="form-group row ">
+						  <label for="url" class="col-2 col-form-label">Url</label>
+						  <div class="col-10">
+						    <input class="form-control" type="text" name="Url" ng-model="system.url" id="url">
+						  </div>
+						</div>
+					</form>
+
+					<div class="alert alert-danger" role="alert" ng-show=" invalid && formHasError() ">
+					  <ul>
+					  <li ng-repeat="(key, errors) in new_system.$error track by $index"> <strong>{{ key }}</strong> Error:
+					    <ul>
+					      <li ng-repeat="e in errors"> <strong>{{ e.$name }}</strong> tem um erro: <strong>{{ key }}</strong>.</li>
+					    </ul>
+					  </li>
+					</ul>
+					</div>
+				</div>
+			</div>
+			<!-- Form !end -->
+			<div class="row bottom-box">
+			    <div class="col-md-12">
+					<button type="button" class="btn btn-success right" ng-click="save();">Salvar</button>
+					<button type="button" class="btn btn-secundary left" ng-click="window.history.back();">Voltar</button>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>

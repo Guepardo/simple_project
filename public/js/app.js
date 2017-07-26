@@ -45,6 +45,7 @@ app.controller('SystemsController', function($scope, System, SystemSearch) {
     $scope.system = {};
     $scope.systems = []; 
     $scope.invalid = false;
+    $scope.submited = false;
     $scope.pagination = {
         page: 0,
         total: 0
@@ -63,7 +64,7 @@ app.controller('SystemsController', function($scope, System, SystemSearch) {
         System.save($scope.system, function(data) {
             if( data.success ) {
                 $scope.clearFieldsForm();
-                alert('Sistema cadastrado com sucesso.');
+                alert('Operação realizada com sucesso.');
             }
         });
     };
@@ -96,7 +97,11 @@ app.controller('SystemsController', function($scope, System, SystemSearch) {
     };
 
     $scope.clearFieldsQuery = function() {
-        $scope.query = {};
+        $scope.query = {
+            'initials': '',
+            'description': '',
+            'attendance_email': ''
+        };
     };
 
     $scope.clearFieldsForm = function() {
@@ -116,6 +121,7 @@ app.controller('SystemsController', function($scope, System, SystemSearch) {
     };
 
     $scope.search = function(page = undefined) {
+        $scope.submited = true;
         var query = $scope.buildSearchQuery();
         SystemSearch.search(query, page)
             .then( function( response ) {

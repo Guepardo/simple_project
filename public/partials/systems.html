@@ -33,13 +33,13 @@
 		    </div>
 			<!-- Form !end -->
 
-			<div class="row" ng-hide="systems.length == 0" >
+			<div class="row" ng-show="submited" >
 				<div class="col-md-12">
 					<div class="card">
 					  <div class="card-header">
 					    Resultado da Consulta
 					  </div>
-					  <div class="card-block">
+					  <div class="card-block" ng-hide="systems.length == 0">
 					  	<table class="table table-striped">
 						  <thead>
 						    <tr>
@@ -83,6 +83,10 @@
 						  </ul>
 						</nav>
 
+					  </div>
+
+					  <div class="card-block" ng-show="systems.length == 0">
+					  	<p>Nenhum Sistema foi encontrado. Favor revisar os critérios da sua pesquisa!</p>
 					  </div>
 					</div>
 				</div>

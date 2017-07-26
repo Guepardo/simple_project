@@ -19,7 +19,7 @@ root_project/public $ bower install
 ```
 
 ### Configurado Banco de Dados
-Na raiz do projeto existe um arquivo '.env.exemple', nesse arquivo há chaves para configuração do Banco de Dados.
+Na raiz do projeto existe um arquivo '.env.exemple', nesse arquivo há chaves para configuração do Banco de Dados. Obs: o arquivo deverá ser renomeado para apenas '.env' para que funcione adequadamente.
 
 
 ### Rodando em modo desenvolvimento

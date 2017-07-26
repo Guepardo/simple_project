@@ -20,6 +20,20 @@ app.config(function($routeProvider, $locationProvider) {
     });
 });
 
+// Funções comuns entre os controladores.
+app.run(function($rootScope) {
+    $rootScope.bestLabel = function(tag) {
+        switch(tag) {
+            case 'required':
+            return 'Dados obrigatórios não informados:';
+            case 'email':
+            return 'E-mail inválido:';
+            case 'maxlength':
+            return 'Tamanho muito grande para os campos:';
+        }
+        return '';
+    }
+});
 
 // Fábrica que gera entidade no padrão resource.
 app.factory('System', function($resource) {

@@ -13,25 +13,55 @@
 					  	<div class="form-group row">
 						  <label for="description" class="col-2 col-form-label">Descrição *</label>
 						  <div class="col-10">
-						    <input class="form-control" type="text" name="Descrição" ng-model="system.description" id="description" required>
+						    <input 
+						    	class="form-control" 
+						    	type="text"
+						    	name="Descrição"
+						    	ng-model="system.description" 
+						    	id="description"
+						    	required
+						    	ng-maxlength="100"
+						    >
 						  </div>
 						</div>
 						<div class="form-group row">
 						  <label for="initials" class="col-2 col-form-label">Sigla *</label>
 						  <div class="col-10">
-						    <input class="form-control" type="text" name="Sigla" ng-model="system.initials" id="initials" required>
+						    <input 
+						    	class="form-control"
+						    	type="text"
+						    	name="Sigla"
+						    	ng-model="system.initials"
+						    	id="initials"
+						    	ng-maxlength="10"
+						    	required
+						    >
 						  </div>
 						</div>
 						<div class="form-group row">
 						  <label for="attendance_email" class="col-2 col-form-label">E-mail de Atend.</label>
 						  <div class="col-10">
-						    <input class="form-control" type="email" name="E-mail de Atendimento" ng-model="system.attendance_email" id="attendance_email" >
+						    <input
+						    	class="form-control"
+						    	type="email"
+						    	name="E-mail de Atendimento"
+						    	ng-model="system.attendance_email"
+						    	id="attendance_email"
+								ng-maxlength="100"
+						    	>
 						  </div>
 						</div>
 						<div class="form-group row ">
 						  <label for="url" class="col-2 col-form-label">Url</label>
 						  <div class="col-10">
-						    <input class="form-control" type="text" name="Url" ng-model="system.url" id="url">
+						    <input
+						    	class="form-control"
+						    	type="text"
+						    	name="Url"
+						    	ng-model="system.url"
+						    	id="url"
+						    	ng-maxlength="50"
+						    >
 						  </div>
 						</div>
 					</form>
@@ -39,7 +69,7 @@
 					<div class="alert alert-danger" role="alert" ng-show=" invalid && formHasError() ">
 					  <ul>
 					  <li ng-repeat="(key, errors) in new_system.$error track by $index">
-					   <strong>{{ (key == 'required') ? 'Dados obrigatórios não informados:' : 'E-mail inválido:' }}</strong> 
+					   <strong>{{ bestLabel(key) }}</strong> 
 					    <ul>
 					      <li ng-repeat="e in errors"> <strong>{{ e.$name }}</strong></li>
 					    </ul>
